@@ -53,6 +53,9 @@ def register(request):
                 user=user,
                 displayname=form.cleaned_data['displayname']
             )
+            library.objects.create(
+                profile=profile.objects.get(user=user)
+            )
 
             return redirect('login')
     else:
