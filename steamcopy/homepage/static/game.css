@@ -1,0 +1,78 @@
+.game-detail {
+    width: 60%;
+    margin: auto;
+    margin-top: 10px;
+    padding: 20px;
+    background: rgb(43, 43, 43);
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 12px #aaa;
+    color: white;
+}
+
+h2 {
+    text-align: center;
+}
+body {
+    overflow-x : hidden;
+}
+
+.game-detail h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.game-cover img {
+    width: 100%;
+    height: auto;
+    border-bottom: 2px solid #ccc;
+}
+
+.game-description,
+.game-details {
+    margin-top: 20px;
+}
+
+.game-details p {
+    margin-bottom: 10px;
+}
+
+.game-actions button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#remove {
+    background-color: red !important;
+}
+
+.game-action {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+a:hover {
+    text-decoration: none;
+    color: white;
+    background-color: #218838;
+}
+
+
+.game-actions button:hover {
+    background-color: #218838;
+}
+
+.review {
+    margin-top: 50px;
+    border: 1px solid #fff;
+    padding: 20px;
+}

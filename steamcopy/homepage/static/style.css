@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    background-color: rgb(46, 46, 46) !important;
+    font-family: 'Oxygen', sans-serif;
+    width: 100vw;
+    height: 100vh;
+}
+
+.fade-in {
+    opacity: 0;
+    animation: fadeIn ease-in 1; /* ease-in jest ważne dla płynnego efektu fade-in */
+    animation-fill-mode: forwards; /* utrzymuje widoczność elementu po zakończeniu animacji */
+    animation-duration: 1s; /* Czas trwania animacji, możesz dostosować do swoich potrzeb */
+  }
+
+  
+ul.topnav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  ul.topnav li {float: left;}
+  
+  ul.topnav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  ul.topnav li a:hover:not(.active) {background-color: #111;}
+
+
+ul.topnav li.right {float: right;}
+
+@media screen and (max-width: 600px) {
+  ul.topnav li.right, 
+  ul.topnav li {float: none;}
+}
+
+  @keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+
+  .messages {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.message {
+    max-width: 400px;
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid #ddd;
+    background-color: #e8e8e8;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.message.success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+.message.warning {
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    color: #856404;
+}
+
+.message.info {
+    background-color: #cce5ff;
+    border-color: #b8daff;
+    color: #004085;
+}
