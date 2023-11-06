@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Review {{game.title}}{% endblock %}
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'review.css' %}">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Review for: {{ game.title }}</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            {{ form.rating.label_tag }} <br>
+                            {{ form.rating }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.content.label_tag }} <br>
+                            {{ form.content }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Review</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

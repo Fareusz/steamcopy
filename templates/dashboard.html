@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Dashboard{% endblock %}
+{% block extra_style %}
+{% static "" as baseUrl %}
+<link rel="stylesheet" href="{% static 'dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+<div class="user-panel">
+    <div class="panel-left">
+        <div class="panel-left-top">
+            <p class="headline">Welcome, {{ profile.displayname }}</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, obcaecati placeat doloribus deserunt suscipit error omnis excepturi! Ex non ratione excepturi voluptate nihil dignissimos officia reiciendis? Quia mollitia animi eaque.</p>
+        </div>
+        <div class="panel-left-bottom">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur voluptate error ipsum neque obcaecati commodi magnam perspiciatis, laboriosam nulla dolorum ex aliquid sed ratione? Quidem, facere? Eligendi unde quis quos!</p>
+        </div>
+    </div>
+    <div class="panel-right">
+
+        <div class="headline-container">
+            <h1>Library:</h1>
+            <div class="tiles-container">
+
+
+                {% if games %}
+                {% for game in games %}
+                
+                <div id="{{ game.id }}" class="game-tile" style="background-position: center; background-image: url('{{ game.cover.url }}'); background-size: cover;">
+                    <a class="game-link" href="{% url 'game' game.id %}">
+                    <div class="tile-text">
+                        <p>{{ game.title }}</p>
+                    </div>
+                    </a>
+                </div>
+            
+                {% endfor %}
+                {% endif %}
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
