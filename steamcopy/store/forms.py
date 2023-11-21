@@ -1,5 +1,5 @@
 from django import forms
-from .models import Review
+from .models import Review, Publishers, Developers, Tags
 
 class ReviewForm(forms.ModelForm):
     class Meta:
@@ -9,3 +9,18 @@ class ReviewForm(forms.ModelForm):
             'rating': forms.RadioSelect(choices=[(True, 'I like it'), (False, "I don't like it")]),
             'content': forms.Textarea(attrs={'rows': 4, 'cols': 15, 'placeholder': 'Your Review...'}),
         }
+
+class SearchForm(forms.Form):
+    publisher = forms.ModelChoiceField(
+        queryset=Publishers.objects.all(),
+        required=False
+    )
+    developer = forms.ModelChoiceField(
+        queryset=Developers.objects.all(),
+        required=False
+    )
+    tags = forms.ModelMultipleChoiceField(
+        queryset=Tags.objects.all(),
+        required=False,
+        widget=forms.CheckboxSelectMultiple
+    )

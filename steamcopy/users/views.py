@@ -4,6 +4,8 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import RegistrationForm, LoginForm
 from django.contrib.auth.models import User
 from .models import profile, library
+from store.models import Cart
+from homepage.views import getcart
 
 # Create your views here.
 def dashboard(request):
@@ -11,7 +13,8 @@ def dashboard(request):
         return redirect('login')
     Profile = profile.objects.get(user=request.user)
     games = library.objects.get(profile=Profile).games.all()
-    return render(request, 'dashboard.html', {'profile': Profile, 'games': games})
+    cart = getcart(request)
+    return render(request, 'dashboard.html', {'profile': Profile, 'games': games, 'cart': cart})
 
 
 def logout_view(request):
@@ -30,12 +33,11 @@ def login_view(request):
                 messages.error(request, 'Invalid username or password')
                 return render(request, 'login.html', {'form': form})
             login(request, user)
-            
             return redirect('dashboard')
     else:
         form = LoginForm()
-    
-    return render(request, 'login.html', {'form': form})
+    cart = getcart(request)
+    return render(request, 'login.html', {'form': form, 'cart': cart})
 
 
 def register(request):
@@ -56,9 +58,13 @@ def register(request):
             library.objects.create(
                 profile=profile.objects.get(user=user)
             )
+            Cart.objects.create(
+                user=profile.objects.get(user=user),
+            )
 
             return redirect('login')
     else:
         form = RegistrationForm()
 
-    return render(request, 'register.html', {'form': form})
+    cart = getcart(request)
+    return render(request, 'register.html', {'form': form, 'cart': cart})

@@ -20,7 +20,7 @@
 
     <div class="game-actions">
         {% if not game in ownedgames %}
-        <a class="game-action" href="{% url 'add_game' game.id %}" role="button" style="background-color: green;">Add to your library.</a>
+        <a class="game-action" href="{% url 'add_game' game.id %}" role="button" style="background-color: green;">Add to cart.</a>
         {% else %}
         <a id="remove" class="game-action" href="{% url 'remove_game' game.id %}" role="button">Remove from your library.</a>
         <a id="rate" class="game-action" href="{% url 'rate_game' game.id %}" role="button">Rate the game.</a>
