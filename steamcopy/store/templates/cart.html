@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Dashboard{% endblock %}
+{% block extra_style %}
+{% static "" as baseUrl %}
+<link rel="stylesheet" href="{% static 'dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'cart.css' %}" class="css">
+{% endblock %}
+
+{% block content %}
+
+<div class="cart">
+    {% for game in cart.games.all %}
+
+        <div class="game">
+            <h2>{{ game.title }}</h2>
+            <h4>{{ game.price }} $</h4>
+            <a class="cart-action" href="{% url 'remove_from_cart' game.id %}" role="button" style="background-color: red;">Remove from cart.</a>
+        </div>
+
+
+    {% empty %}
+    <h1>You have no items in your cart.</h1>
+
+    {% endfor %}
+    <div class="price">
+        <p>Total Price: {{ total|floatformat:2 }} $</p>
+    </div>
+</div>
+
+{% endblock %}

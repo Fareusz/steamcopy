@@ -1,0 +1,15 @@
+.game {
+    display: block;
+    padding: 20px;
+    border: 2px white solid;
+
+}
+.cart {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-action {
+    
+}
