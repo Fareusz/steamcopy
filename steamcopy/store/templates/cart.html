@@ -14,7 +14,12 @@
 
         <div class="game">
             <h2>{{ game.title }}</h2>
-            <h4>{{ game.price }} $</h4>
+            {% if game.deal > 0 %}
+                <p class="discounted-price">{{ game.price }} $</p>
+                <h3 class="new-price">{{ game.get_discounted_price }} $ ({{ game.deal }}% off) </h3>
+            {% else %}
+                    <h3 class="game-price">Price: {{ game.price }} $</h3>
+            {% endif %}
             <a class="cart-action" href="{% url 'remove_from_cart' game.id %}" role="button" style="background-color: red;">Remove from cart.</a>
         </div>
 
@@ -23,9 +28,14 @@
     <h1>You have no items in your cart.</h1>
 
     {% endfor %}
-    <div class="price">
-        <p>Total Price: {{ total|floatformat:2 }} $</p>
+
+    {% if total > 0.0 %}
+    <div class="checkout">
+        <a class="checkout-button" href="{% url 'checkout' %}" role="button">Checkout Total: {{ total|floatformat:2 }} $</a>
     </div>
+    {% endif %}
+
 </div>
+
 
 {% endblock %}

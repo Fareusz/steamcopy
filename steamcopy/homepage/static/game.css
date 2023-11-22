@@ -9,6 +9,13 @@
     color: white;
 }
 
+
+.discounted-price {
+    color: red;
+    text-decoration: line-through;
+}
+
+
 h2 {
     text-align: center;
 }

@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .models import Game, Review, Game_tags, Cart
 from users.models import library, profile
 from .forms import ReviewForm, SearchForm
@@ -17,7 +18,6 @@ def remove_game(request, game_id):
 
 @login_required
 def add_game(request, game_id):
-    Profile = get_object_or_404(profile, user=request.user)
     game = get_object_or_404(Game, id=game_id)
     cart = getcart(request)
     if game not in cart.games.all():
@@ -69,8 +69,18 @@ def cart_view(request):
     cart = getcart(request)
     total = float(0.00)
     for game in cart.games.all():
-        total += game.price
+        if game.deal > 0: total += float(game.get_discounted_price())
+        else: total += game.price
     return render(request, 'cart.html', {'cart': cart, 'total': total})
+
+def buy_cart(request):
+    cart = getcart(request)
+    Profile = profile.objects.get(user=request.user)
+    for game in cart.games.all():
+        library.objects.get(profile=Profile).games.add(game)
+        cart.games.remove(game)
+    messages.success(request, 'You have successfully purchased your games!')
+    return redirect('dashboard')
 
 def remove_from_cart_view(request, game_id):
     game = get_object_or_404(Game, id=game_id)
@@ -102,8 +112,11 @@ def game(request, game_id):
         negativereviews = None
     positivereviews_count = Review.objects.filter(game=game, rating=True).count()
     negativereviews_count = Review.objects.filter(game=game, rating=False).count()
-    Profile = profile.objects.get(user=request.user)
-    ownedgames = library.objects.get(profile=Profile).games.all()
+    if request.user.is_authenticated:
+        Profile = profile.objects.get(user=request.user)
+        ownedgames = library.objects.get(profile=Profile).games.all()
+    else:
+        ownedgames = None
     cart = getcart(request)
     return render(request, 'game_detail.html', {'game': game, 'cart': cart, "positivereviews": positivereviews, "negativereviews": negativereviews, "positivereviews_count": positivereviews_count, "negativereviews_count": negativereviews_count, "ownedgames": ownedgames})
 

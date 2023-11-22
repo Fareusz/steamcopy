@@ -12,13 +12,19 @@
         <div class="game">
             <img src="{{ game.cover.url }}" alt="{{ game.title }} Cover" />
             <h2>{{ game.title }}</h2>
-            <p>{{ game.description }}</p>
+            <p class="game-desc">{{ game.description }}</p>
             {% if not game in ownedgames %}
-            <p>Price: {{ game.price }} $</p>
+
+            {% if game.deal > 0 %}
+                <p class="discounted-price">{{ game.price }} $</p>
+                <p class="new-price">{{ game.get_discounted_price }} $ ({{ game.deal }}% off) </p>
+            {% else %}
+                <p class="game-price">Price: {{ game.price }} $</p>
+            {% endif %}
             <a href="{% url 'game' game.id %}" class="buy-button">Details</a>
             {% else %}
-            <p>You own this product.</p>
-            <a href="{% url 'game' game.id %}" class="buy-button">Details</a>
+                <p class="game-price">You own this product.</p>
+                <a href="{% url 'game' game.id %}" class="buy-button">Details</a>
             {% endif %}
         </div>
     {% endfor %}

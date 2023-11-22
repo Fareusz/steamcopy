@@ -42,14 +42,22 @@ ul.topnav li.right {float: right;}
   ul.topnav li {float: none;}
 }
 
+@keyframes fadeOut {
+  0% {opacity:1;}
+  100% {opacity:0;}
+}
   @keyframes fadeIn {
     0% {opacity:0;}
     100% {opacity:1;}
   }
 
   .messages {
+    animation: fadeOut ease-out 1s; 
+    animation-fill-mode: forwards; 
+    animation-delay: 5s; 
     width: 100%;
     position: fixed;
+    pointer-events: none;
     top: 0;
     z-index: 1000; 
     display: flex;

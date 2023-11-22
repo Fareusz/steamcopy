@@ -10,6 +10,33 @@
     flex-direction: column;
 }
 
+
+.discounted-price {
+    color: red;
+    text-decoration: line-through;
+}
+
+.new-price {
+    margin-bottom: 20px;
+}
+
 .cart-action {
-    
+    border: 2px white solid;
+    padding: 5px;
+    color: white;
+    text-decoration: none;
+}
+
+.checkout { 
+    text-align: center;
+}
+
+.checkout-button {
+    color: white;
+    margin-top: 60px;
+    padding: 20px;
+    border: 2px white solid;
+    background-color: green;
+    text-align: center;
+    display: block;
 }

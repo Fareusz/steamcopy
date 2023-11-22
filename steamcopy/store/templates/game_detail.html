@@ -20,8 +20,18 @@
 
     <div class="game-actions">
         {% if not game in ownedgames %}
+
+        {% if game.deal > 0 %}
+                <p class="discounted-price">{{ game.price }} $</p>
+                <p class="new-price">{{ game.get_discounted_price }} $ ({{ game.deal }}% off) </p>
+        {% else %}
+                <p class="game-price">Price: {{ game.price }} $</p>
+        {% endif %}
+
+
         <a class="game-action" href="{% url 'add_game' game.id %}" role="button" style="background-color: green;">Add to cart.</a>
         {% else %}
+        <a id="play" href="steam://run/{{ game.steamid }}" class="game-action" role="button">Play (runs steam)</a>
         <a id="remove" class="game-action" href="{% url 'remove_game' game.id %}" role="button">Remove from your library.</a>
         <a id="rate" class="game-action" href="{% url 'rate_game' game.id %}" role="button">Rate the game.</a>
         {% endif %}

@@ -3,8 +3,22 @@
     flex-wrap: wrap;
 }
 
+body {
+    overflow-x: hidden;
+}
+
+.new-price {
+    text-align: center;
+}
+
+.discounted-price {
+    text-align: center;
+    color: red;
+    text-decoration: line-through;
+}
+
 .game {
-    width: 200px;
+    width: 25vw;
     color: white;
     margin: 15px;
     padding: 10px;
@@ -14,7 +28,24 @@
 
 .game img {
     max-width: 100%;
-    height: auto;
+    width: 100%;
+    height: 300px;
+}
+
+.game h2 {
+    margin-top: 20px;
+    text-align: center;
+    height: 50px;
+    overflow: hidden;
+}
+
+.game-desc {
+    height: 300px;
+    overflow: auto;
+}
+
+.game-price {
+    text-align: center;
 }
 
 .buy-button {
@@ -23,6 +54,8 @@
     padding: 10px 20px;
     text-decoration: none;
     display: inline-block;
+    width: 100%;
+    text-align: center;
 }
 
 .forms {

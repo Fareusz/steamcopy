@@ -1,4 +1,5 @@
 from django.db import models
+from decimal import Decimal, ROUND_HALF_UP
 
 # Create your models here.
 class Review(models.Model):
@@ -37,6 +38,19 @@ class Game(models.Model):
     description = models.TextField(blank=True, null=True, default=None, max_length=1000)
     cover = models.ImageField(upload_to='covers/', blank=True, null=True, default=None)
     price = models.FloatField(blank=False, null=False, default=0.0, max_length=5)
+    steamid = models.IntegerField(blank=False, null=False, default=0)
+    deal = models.IntegerField(blank=False)
+
+    def get_discounted_price(self):
+        if self.deal > 0:
+            price_decimal = Decimal(str(self.price))
+            discount = (price_decimal * self.deal) / 100
+            discounted_price = price_decimal - discount
+            return discounted_price.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+        return self.price
+
+    def __str__(self):
+        return self.title
 
     def getcover(self):
         self.logo.url
